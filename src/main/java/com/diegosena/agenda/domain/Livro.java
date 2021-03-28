@@ -6,6 +6,7 @@ import org.hibernate.validator.constraints.Length;
 import javax.persistence.*;
 import javax.validation.constraints.NotEmpty;
 import java.io.Serializable;
+import java.util.List;
 
 /*
 Utilizado as anotações do Lombok, @Id onde é referenciada a PK e @ a @Entity referencia
@@ -42,14 +43,13 @@ public class Livro implements Serializable {
 
     @JsonIgnore
     @ManyToOne
-    private CategoriaLivros categoriaLivros;
+    private List<CategoriaLivros> categoriaLivros;
 
     public Livro() {
         super();
     }
 
-    public Livro(Integer id, String titulo, String nome_autor, String texto, CategoriaLivros categoriaLivros) {
-        super();
+    public Livro(Integer id, String titulo, String nome_autor, String texto, List<CategoriaLivros> categoriaLivros) {
         this.id = id;
         this.titulo = titulo;
         this.nome_autor = nome_autor;
@@ -89,11 +89,11 @@ public class Livro implements Serializable {
         this.texto = texto;
     }
 
-    public CategoriaLivros getCategoria() {
+    public List<CategoriaLivros> getCategoriaLivros() {
         return categoriaLivros;
     }
 
-    public void setCategoria(CategoriaLivros categoriaLivros) {
+    public void setCategoriaLivros(List<CategoriaLivros> categoriaLivros) {
         this.categoriaLivros = categoriaLivros;
     }
 

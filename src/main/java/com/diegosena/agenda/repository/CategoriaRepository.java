@@ -1,6 +1,6 @@
 package com.diegosena.agenda.repository;
 
-import com.diegosena.agenda.domain.Categoria;
+import com.diegosena.agenda.domain.CategoriaLivros;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
@@ -10,5 +10,5 @@ que seria a classe de acesso a dados. Essa classe extends JpaRepository, informa
 primitivo ao qual nosso id da classe pertence.
  */
 @Repository
-public interface CategoriaRepository extends JpaRepository<Categoria, Integer> {
+public interface CategoriaRepository extends JpaRepository<CategoriaLivros, Integer> {
 }

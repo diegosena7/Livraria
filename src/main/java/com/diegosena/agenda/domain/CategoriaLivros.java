@@ -1,10 +1,12 @@
 package com.diegosena.agenda.domain;
 
+import org.hibernate.validator.constraints.Length;
+
 import javax.persistence.*;
+import javax.validation.constraints.NotEmpty;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Objects;
 
 /*
 Utilizado as anotações do Lombok, @Id onde é referenciada a PK e @ a @Entity referencia
@@ -18,29 +20,36 @@ Usado as anotações @OneToMany para inidicar que teremos 1 livro muitas para ca
 e o parametro mappedBy que fica dentro do @OneToMany é usado no lado fraco do relacionamento.
  */
 @Entity
-public class Categoria implements Serializable {
+public class CategoriaLivros implements Serializable {
+
+    private static final long serialVersionUID = 1L;
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
+
+    @NotEmpty(message = "Campo NOME é requerido")
+    @Length(min = 3, max = 100, message = "O campo NOME deve ter entre 3 e 100 caracteres")
     private String nome;
+
+    @NotEmpty(message = "Campo DESCRIÇÃO é requerido")
+    @Length(min = 3, max = 200, message = "O campo DESCRIÇÃO deve ter entre 3 e 200 caracteres")
     private String descricao;
 
-    @OneToMany(mappedBy = "categoria")
+    @OneToMany(mappedBy = "categoriaLivros")
     private List<Livro> livros = new ArrayList<>();
 
-    //Construtor sem parâmetros
-    public Categoria() {
+    public CategoriaLivros() {
+        super();
     }
 
-    //Construtor com parâmetros
-    public Categoria(Integer id, String nome, String descricao) {
+    public CategoriaLivros(Integer id, String nome, String descricao) {
+        super();
         this.id = id;
         this.nome = nome;
         this.descricao = descricao;
     }
 
-    //Getters and seters
     public Integer getId() {
         return id;
     }
@@ -73,17 +82,28 @@ public class Categoria implements Serializable {
         this.livros = livros;
     }
 
-    //Equals and haschcode
     @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        Categoria categoria = (Categoria) o;
-        return id.equals(categoria.id);
+    public int hashCode() {
+        final int prime = 31;
+        int result = 1;
+        result = prime * result + ((id == null) ? 0 : id.hashCode());
+        return result;
     }
 
     @Override
-    public int hashCode() {
-        return Objects.hash(id);
+    public boolean equals(Object obj) {
+        if (this == obj)
+            return true;
+        if (obj == null)
+            return false;
+        if (getClass() != obj.getClass())
+            return false;
+        CategoriaLivros other = (CategoriaLivros) obj;
+        if (id == null) {
+            if (other.id != null)
+                return false;
+        } else if (!id.equals(other.id))
+            return false;
+        return true;
     }
 }

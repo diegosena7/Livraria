@@ -43,13 +43,13 @@ public class Livro implements Serializable {
 
     @JsonIgnore
     @ManyToOne
-    private List<CategoriaLivros> categoriaLivros;
+    private CategoriaLivros categoriaLivros;
 
     public Livro() {
         super();
     }
 
-    public Livro(Integer id, String titulo, String nome_autor, String texto, List<CategoriaLivros> categoriaLivros) {
+    public Livro(Integer id, String titulo, String nome_autor, String texto, CategoriaLivros categoriaLivros) {
         this.id = id;
         this.titulo = titulo;
         this.nome_autor = nome_autor;
@@ -89,11 +89,11 @@ public class Livro implements Serializable {
         this.texto = texto;
     }
 
-    public List<CategoriaLivros> getCategoriaLivros() {
+    public CategoriaLivros getCategoriaLivros() {
         return categoriaLivros;
     }
 
-    public void setCategoriaLivros(List<CategoriaLivros> categoriaLivros) {
+    public void setCategoriaLivros(CategoriaLivros categoriaLivros) {
         this.categoriaLivros = categoriaLivros;
     }
 
